@@ -25,8 +25,14 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "paper" && computerSelection === "rock")) {
 
         return "win";
-    } else {
+
+    } else if ((playerSelection === "scissors" && computerSelection === "rock") ||
+        (playerSelection === "paper" && computerSelection === "scissors") ||
+        (playerSelection === "rock" && computerSelection === "paper")) {
+
         return "loose";
+    } else {
+        return
     }
 
 }
@@ -45,13 +51,16 @@ function game() {
         const playerSelection = prompt("Rock, Paper or Scissor: ");
         const computerSelection = computerPlay();
         if (playRound(playerSelection, computerSelection) === "tie") {
-            console.log("It's a Tie!");
+            console.log("It's a Tie! redo round");
             i--;
         } else if (playRound(playerSelection, computerSelection) === "win") {
-            console.log("You won this round! well done")
+            console.log(`Round ${i + 1}: You won this round! well done`)
             playerScore++;
+        } else if (playRound(playerSelection, computerSelection) === "win") {
+            console.log(`Round ${i + 1}:You lost this round! :\(`);
         } else {
-            console.log("You lost this round! :\(");
+            console.log("Incorrect choice, choose again")
+            i--;
         }
     }
     if (playerScore >= 3) {
