@@ -19,23 +19,46 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return "It's a TIE! Try again."
+        return "tie"
     } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "rock")) {
 
-        return "You win this round, good on you!";
+        return "win";
     } else {
-        return "You loose :(";
+        return "loose";
     }
 
 }
 
-const playerSelection = "paper"
-const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
-
-
 //create function named game that plays through 5 rounds of the game and reports the winner at the end
+//create for loop 
+//create variable to store the score
+//determine winner
+//return winner
 
 
+function game() {
+    let playerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Rock, Paper or Scissor: ");
+        const computerSelection = computerPlay();
+        if (playRound(playerSelection, computerSelection) === "tie") {
+            console.log("It's a Tie!");
+            i--;
+        } else if (playRound(playerSelection, computerSelection) === "win") {
+            console.log("You won this round! well done")
+            playerScore++;
+        } else {
+            console.log("You lost this round! :\(");
+        }
+    }
+    if (playerScore >= 3) {
+        console.log("You won the game!")
+    } else {
+        console.log("You lost the game!")
+    }
+}
+
+game();
