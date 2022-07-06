@@ -19,7 +19,9 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
+
         return "tie"
+
     } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "rock")) {
@@ -30,11 +32,8 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "paper" && computerSelection === "scissors") ||
         (playerSelection === "rock" && computerSelection === "paper")) {
 
-        return "loose";
-    } else {
-        return
+        return "lost";
     }
-
 }
 
 //create function named game that plays through 5 rounds of the game and reports the winner at the end
@@ -48,25 +47,27 @@ function game() {
     let playerScore = 0;
 
     for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Rock, Paper or Scissor: ");
+        const playerSelection = prompt("Rock, Paper or Scissor: ").toLowerCase();
         const computerSelection = computerPlay();
+
         if (playRound(playerSelection, computerSelection) === "tie") {
             console.log("It's a Tie! redo round");
             i--;
         } else if (playRound(playerSelection, computerSelection) === "win") {
-            console.log(`Round ${i + 1}: You won this round! well done`)
+            console.log(`Round ${i + 1}: You won this round! well done`);
             playerScore++;
-        } else if (playRound(playerSelection, computerSelection) === "win") {
+        } else if (playRound(playerSelection, computerSelection) === "lost") {
             console.log(`Round ${i + 1}:You lost this round! :\(`);
         } else {
             console.log("Incorrect choice, choose again")
             i--;
         }
     }
+    //Check player score, if 3 or more, player wins, else player has lost.
     if (playerScore >= 3) {
-        console.log("You won the game!")
+        console.log("You won the game!");
     } else {
-        console.log("You lost the game!")
+        console.log("You lost the game!");
     }
 }
 
