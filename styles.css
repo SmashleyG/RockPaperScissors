@@ -21,7 +21,7 @@ body {
 
 /* Menu Screen */
 
-#menu {
+#menu-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,3 +57,5 @@ body {
 .menu-button:hover {
     background-color: rgb(32, 170, 235);
 }
+
+/* Game Screen */

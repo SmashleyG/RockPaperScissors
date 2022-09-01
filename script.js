@@ -53,6 +53,8 @@ function game() {
 
 //game();
 
+const mainContainer = document.querySelector('#main-container');
+
 function removeScreen(screen) {
 
     const gameTitle = document.querySelector('h1');
@@ -67,9 +69,33 @@ function removeScreen(screen) {
 
 }
 
+
+// Game Screen
+function displayGameScreen(rounds) {
+
+    // Set main container size
+    mainContainer.style.width = '800px'
+    mainContainer.style.height = '700x'
+
+    // Add game container
+    const gameContainer = document.createElement('div');
+    gameContainer.id = 'game-container';
+    mainContainer.appendChild(gameContainer);
+
+    // Add back button
+    const back = document.createElement('button');
+    back.textContent = 'Back';
+    gameContainer.appendChild(back);
+
+    back.addEventListener('click', () => {
+        removeScreen(gameContainer.id);
+        displayMenuScreen();
+    });
+}
+
 // Menu Screen
-function displayMenu() {
-    const mainContainer = document.querySelector('#main-container');
+function displayMenuScreen() {
+
     mainContainer.style.width = '450px';
     mainContainer.style.height = '650px';
 
@@ -82,7 +108,7 @@ function displayMenu() {
 
     //Add menu container
     const menu = document.createElement('div');
-    menu.id = 'menu';
+    menu.id = 'menu-container';
     mainContainer.appendChild(menu);
 
     // Rules Image
@@ -112,14 +138,10 @@ function displayMenu() {
         menu.appendChild(menuButton);
 
         menuButton.addEventListener('click', () => {
-
             console.log(menuRound[0])
             removeScreen(menu.id);
+            displayGameScreen(menuRound[0]);
         });
-
-
-
-
     });
 
 
@@ -128,4 +150,4 @@ function displayMenu() {
 
 
 
-displayMenu();
+displayMenuScreen();
