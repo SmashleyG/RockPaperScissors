@@ -53,7 +53,21 @@ function game() {
 
 //game();
 
+function removeScreen(screen) {
 
+    const gameTitle = document.querySelector('h1');
+    if (gameTitle) {
+
+        gameTitle.remove();
+
+    }
+
+    const removeScreen = document.querySelector(`#${screen}`);
+    removeScreen.remove();
+
+}
+
+// Menu Screen
 function displayMenu() {
     const mainContainer = document.querySelector('#main-container');
     mainContainer.style.width = '450px';
@@ -83,8 +97,7 @@ function displayMenu() {
     menuInstruction.textContent = 'Select the amount of Rounds per game.';
     menu.appendChild(menuInstruction);
 
-    // Create buttons 
-
+    // Create menu buttons
     const roundOptions = [[1, "One"], [3, "Three"], [5, "Five"]];
     roundOptions.forEach((menuRound) => {
         let menuButton = document.createElement('button');
@@ -97,8 +110,22 @@ function displayMenu() {
         menuButton.id = `menu-${menuRound[1]}`
         menuButton.classList = "menu-button";
         menu.appendChild(menuButton);
+
+        menuButton.addEventListener('click', () => {
+
+            console.log(menuRound[0])
+            removeScreen(menu.id);
+        });
+
+
+
+
     });
+
+
 }
+
+
 
 
 displayMenu();
