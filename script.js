@@ -53,7 +53,7 @@ function game() {
 
 //game();
 
-const mainContainer = document.querySelector('#main-container');
+
 
 function removeScreen(screen) {
 
@@ -72,29 +72,55 @@ function removeScreen(screen) {
 
 // Game Screen
 function displayGameScreen(rounds) {
+    let mainContainerOne = document.querySelector('#main-container');
 
     // Set main container size
-    mainContainer.style.width = '800px'
-    mainContainer.style.height = '700x'
+    mainContainerOne.style.width = '800px'
+    mainContainerOne.style.height = '700x'
 
-    // Add game container
-    const gameContainer = document.createElement('div');
-    gameContainer.id = 'game-container';
-    mainContainer.appendChild(gameContainer);
 
-    // Add back button
-    const back = document.createElement('button');
-    back.textContent = 'Back';
-    gameContainer.appendChild(back);
+    mainContainerOne.addEventListener('transitionend', () => {
+        // Add game container
 
-    back.addEventListener('click', () => {
-        removeScreen(gameContainer.id);
-        displayMenuScreen();
-    });
+        const gameContainer = document.createElement('div');
+        gameContainer.id = 'game-container';
+        mainContainerOne.appendChild(gameContainer);
+
+        // Add Header container 
+        const header = document.createElement('div');
+        header.id = 'header';
+        gameContainer.appendChild(header);
+
+        // Rounds left 
+        const roundsLeft = document.createElement('h2');
+        roundsLeft.id = 'rounds-left'
+        roundsLeft.textContent = `Rounds left: ${rounds} `;
+        header.appendChild(roundsLeft);
+
+        // Add back button
+        const back = document.createElement('button');
+        back.textContent = 'Back';
+        header.appendChild(back);
+
+        back.addEventListener('click', () => {
+
+            removeScreen(gameContainer.id);
+            displayMenuScreen();
+
+        });
+
+        const displayRoundResults = document.createElement('h1');
+        displayRoundResults.id = 'display-round-results';
+        displayRoundResults.textContent = 'Fight!';
+        gameContainer.appendChild(displayRoundResults);
+    }, { once: true });
+
 }
+
 
 // Menu Screen
 function displayMenuScreen() {
+    let mainContainer = document.querySelector('#main-container');
 
     mainContainer.style.width = '450px';
     mainContainer.style.height = '650px';
@@ -127,20 +153,23 @@ function displayMenuScreen() {
     const roundOptions = [[1, "One"], [3, "Three"], [5, "Five"]];
     roundOptions.forEach((menuRound) => {
         let menuButton = document.createElement('button');
-        console.log(menuRound[0]);
+
         if (menuRound[0] == 1) {
             menuButton.textContent = `${menuRound[1]} Round`;
         } else {
             menuButton.textContent = `${menuRound[1]} Rounds`;
         }
-        menuButton.id = `menu-${menuRound[1]}`
+        menuButton.id = `menu - ${menuRound[1]} `
         menuButton.classList = "menu-button";
         menu.appendChild(menuButton);
 
         menuButton.addEventListener('click', () => {
-            console.log(menuRound[0])
+
+
             removeScreen(menu.id);
+
             displayGameScreen(menuRound[0]);
+
         });
     });
 
