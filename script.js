@@ -80,13 +80,13 @@ function displayGameScreen(rounds) {
 
 
     mainContainerOne.addEventListener('transitionend', () => {
-        // Add game container
+        // Game container
 
         const gameContainer = document.createElement('div');
         gameContainer.id = 'game-container';
         mainContainerOne.appendChild(gameContainer);
 
-        // Add Header container 
+        // Header container 
         const header = document.createElement('div');
         header.id = 'header';
         gameContainer.appendChild(header);
@@ -97,22 +97,75 @@ function displayGameScreen(rounds) {
         roundsLeft.textContent = `Rounds left: ${rounds} `;
         header.appendChild(roundsLeft);
 
-        // Add back button
-        const back = document.createElement('button');
-        back.textContent = 'Back';
-        header.appendChild(back);
+        // Back button
+        const backButton = document.createElement('button');
+        backButton.textContent = 'Back';
+        header.appendChild(backButton);
 
-        back.addEventListener('click', () => {
+        backButton.addEventListener('click', () => {
 
             removeScreen(gameContainer.id);
             displayMenuScreen();
 
         });
+        // Round results 
+        const roundResults = document.createElement('h1');
+        roundResults.id = 'round-results';
+        roundResults.textContent = 'Fight!';
+        gameContainer.appendChild(roundResults);
 
-        const displayRoundResults = document.createElement('h1');
-        displayRoundResults.id = 'display-round-results';
-        displayRoundResults.textContent = 'Fight!';
-        gameContainer.appendChild(displayRoundResults);
+        // Battle screen
+        const battleScreen = document.createElement('div');
+        battleScreen.id = 'battle-screen';
+        gameContainer.appendChild(battleScreen);
+
+        // Player Interface
+        const playerInterface = document.createElement('div');
+        playerInterface.id = 'player-interface';
+        battleScreen.appendChild(playerInterface);
+
+        // Players Score
+        const playerScore = document.createElement('h1');
+        playerScore.id = 'player-score';
+        playerScore.textContent = `Players Score: `;
+        playerInterface.appendChild(playerScore);
+
+        // Players Selection
+        const playersSelection = document.createElement('img');
+        playersSelection.id = 'players-selection';
+        playersSelection.src = `images/Rock.png`;
+        playersSelection.style.height = '172px';
+        playersSelection.style.width = '250px';
+        playerInterface.appendChild(playersSelection);
+
+        //
+        const verse = document.createElement('p');
+        verse.id = 'vs';
+        verse.textContent = 'vs';
+        verse.style.alignSelf = 'center';
+        verse.style.fontSize = '50px'
+        battleScreen.appendChild(verse);
+
+        // Computers Interface
+        const computerInterface = document.createElement('div');
+        computerInterface.id = 'computer-interface';
+        battleScreen.appendChild(computerInterface);
+
+        // Computers Score
+        const computerScore = document.createElement('h1');
+        computerScore.id = 'computer-score';
+        computerScore.textContent = `Computer Score: `;
+        computerInterface.appendChild(computerScore);
+
+        const computersSelection = document.createElement('img');
+        computersSelection.id = 'computers-selection';
+        computersSelection.src = 'images/Paper.png';
+        computersSelection.style.height = '172px';
+        computersSelection.style.width = '250px';
+        computerInterface.appendChild(computersSelection);
+
+
+
     }, { once: true });
 
 }

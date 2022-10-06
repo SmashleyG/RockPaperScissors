@@ -73,3 +73,9 @@ body {
     align-items: flex-start;
     width: 750px;
 }
+
+#battle-screen {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+}
