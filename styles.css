@@ -79,3 +79,14 @@ body {
     justify-content: space-between;
     width: 700px;
 }
+
+#players-action-selection-menu {
+    display: flex;
+    justify-content: left;
+    width: 700px;
+    border-radius: 5px;
+    margin: 5px;
+    border: 7px solid black;
+    gap: 20px;
+    margin-top: 20px;
+}

@@ -69,6 +69,26 @@ function removeScreen(screen) {
 
 }
 
+function actionPlayerSelection(images, startButton, playersSelection){
+    let selected = null; 
+
+    images.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.style.border = '3px solid transparent';
+        img.style.borderRadius = '8px';
+        
+        img.addEventListener('click', () => {
+            images.forEach(i => i.style.border = '3px solid transparent');
+            img.style.border = '3px solid #00f';
+            playersSelection.src = img.src;
+            selected = img.id;
+            startButton.disabled = false;
+        });
+    });
+
+    return () => selected; // return selection.
+}
+
 
 // Game Screen
 function displayGameScreen(rounds) {
@@ -76,7 +96,7 @@ function displayGameScreen(rounds) {
 
     // Set main container size
     mainContainerOne.style.width = '800px'
-    mainContainerOne.style.height = '700x'
+    mainContainerOne.style.height = '700px'
 
 
     mainContainerOne.addEventListener('transitionend', () => {
@@ -108,12 +128,7 @@ function displayGameScreen(rounds) {
             displayMenuScreen();
 
         });
-        // Round results 
-        const roundResults = document.createElement('h1');
-        roundResults.id = 'round-results';
-        roundResults.textContent = 'Fight!';
-        gameContainer.appendChild(roundResults);
-
+        
         // Battle screen
         const battleScreen = document.createElement('div');
         battleScreen.id = 'battle-screen';
@@ -163,6 +178,57 @@ function displayGameScreen(rounds) {
         computersSelection.style.height = '172px';
         computersSelection.style.width = '250px';
         computerInterface.appendChild(computersSelection);
+
+        // Players action selection
+        const playersActionSelectionMenu = document.createElement('div');
+        playersActionSelectionMenu.id = 'players-action-selection-menu';
+        gameContainer.appendChild(playersActionSelectionMenu);
+
+        //Players action selection
+        const playerActionPaper = document.createElement('img');
+        playerActionPaper.id = 'players-action-paper';
+        playerActionPaper.src = 'images/Paper.png';
+        playerActionPaper.style.height = '76.8px';
+        playerActionPaper.style.width = '76.8px';
+        playersActionSelectionMenu.appendChild(playerActionPaper);
+
+        //Players action selection
+        const playerActionScissor = document.createElement('img');
+        playerActionScissor.id = 'players-action-scissor';
+        playerActionScissor.src = 'images/Scissors.png';
+        playerActionScissor.style.height = '76.8px';
+        playerActionScissor.style.width = '76.8px';
+        playersActionSelectionMenu.appendChild(playerActionScissor);
+
+        //Players action selection
+        const playerActionRock = document.createElement('img');
+        playerActionRock.id = 'players-action-rock';
+        playerActionRock.src = 'images/Rock.png';
+        playerActionRock.style.height = '76.8px';
+        playerActionRock.style.width = '76.8px';
+        playersActionSelectionMenu.appendChild(playerActionRock);
+
+        const actionImages = [playerActionPaper, playerActionScissor, playerActionRock];
+        
+        //Create start round button
+        const startGameButton = document.createElement('button');
+        startGameButton.textContent = 'Start Round';
+        startGameButton.disabled = true;
+        startGameButton.style.marginTop = '20px';
+        startGameButton.style.padding = '10px 20px';
+        startGameButton.style.fontSize = '16px';
+        startGameButton.style.cursor = 'pointer';
+        playersActionSelectionMenu.appendChild(startGameButton);
+
+        const getSelectedAction = actionPlayerSelection(actionImages, startGameButton, playersSelection);
+
+        startGameButton.addEventListener('click', () => {
+            const selectedAction = getSelectedAction();
+            if (!selectedAction) return;
+
+            console.log("Player selected: ", selectedAction);
+            startGameButton.disabled = true;
+        });
 
 
 
@@ -228,8 +294,5 @@ function displayMenuScreen() {
 
 
 }
-
-
-
 
 displayMenuScreen();
